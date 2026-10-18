@@ -1,0 +1,1486 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KING FRESH MUSIC & BOLIGERIA BLOG | Premium African Music & News</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            DEFAULT: '#1264D8', // Primary blue
+                            dark: '#0B2D5C', // Dark blue
+                            light: '#EAF3FF', // Light blue
+                            bg: '#F5F7FA', // Light grey
+                            text: '#172B4D', // Main text
+                            accent: '#36B37E' // Green highlight
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #F5F7FA;
+            color: #172B4D;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #EAF3FF;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #1264D8;
+            border-radius: 4px;
+        }
+        /* Marquee animation for Breaking News */
+        
+        @keyframes marquee {
+            0% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+        
+        .animate-marquee {
+            display: inline-block;
+            white-space: nowrap;
+            animation: marquee 28s linear infinite;
+        }
+        
+        .animate-marquee:hover {
+            animation-play-state: paused;
+        }
+    </style>
+</head>
+
+<body class="bg-brand-bg text-brand-text flex flex-col min-h-screen pb-20 md:pb-24">
+
+    <!-- ================= TOP UTILITY HEADER ================= -->
+    <div class="bg-brand-dark text-white text-xs py-2 px-4 border-b border-blue-900/50">
+        <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
+            <div class="flex items-center space-x-4">
+                <span class="bg-brand text-white font-bold px-2 py-0.5 rounded text-[10px] tracking-wider uppercase">OFFICIAL PORTAL</span>
+                <span class="hidden sm:inline-block text-blue-200"><i class="fa-solid me-1"></i> KING FRESH MUSIC & BOLIGERIA BLOG GHANA</span>
+            </div>
+            <div class="flex items-center space-x-4">
+                <span id="user-status-badge" class="text-blue-200 text-xs flex items-center">
+          <i class="fa-solid fa-user-circle mr-1"></i> Guest Mode
+        </span>
+                <button onclick="openModal('login-modal')" class="hover:text-brand-light transition text-xs font-semibold underline decoration-brand">
+          Login / Register
+        </button>
+                <button onclick="promptAdminLogin()" class="bg-brand/40 hover:bg-brand text-white px-2 py-1 rounded text-[11px] font-semibold flex items-center gap-1 transition">
+          <i class="fa-solid fa-lock text-[10px]"></i> Admin Access
+        </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= MAIN BRANDING & SEARCH HEADER ================= -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+
+            <!-- Logo -->
+            <div onclick="switchTab('home')" class="cursor-pointer flex items-center space-x-3 group">
+                <div class="w-11 h-11 bg-gradient-to-tr from-brand-dark to-brand text-white font-black text-xl rounded-xl flex items-center justify-center shadow-md shadow-brand/20 group-hover:scale-105 transition">
+                    KF
+                </div>
+                <div>
+                    <h1 class="font-black text-xl sm:text-2xl leading-none text-brand-dark tracking-tight">
+                        KING FRESH <span class="text-brand">MUSIC</span>
+                    </h1>
+                    <p class="text-[10px] sm:text-xs font-bold text-slate-500 uppercase tracking-widest mt-0.5">
+                        BOLIGERIA BLOG GHANA
+                    </p>
+                </div>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="hidden md:flex flex-1 max-w-md mx-6 relative">
+                <input id="global-search-input" onkeyup="handleGlobalSearch(event)" type="text" placeholder="Search songs, artists, articles, events..." class="w-full pl-10 pr-4 py-2 bg-brand-bg text-sm rounded-full border border-slate-200 focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand/20 transition">
+                <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-slate-400 text-sm"></i>
+            </div>
+
+            <!-- Header Social & Mobile Trigger -->
+            <div class="flex items-center space-x-2 sm:space-x-3">
+                <a href="https://facebook.com" target="_blank" class="w-8 h-8 rounded-full bg-brand-light text-brand flex items-center justify-center hover:bg-brand hover:text-white transition text-xs">
+                    <i class="fa-brands fa-facebook-f"></i>
+                </a>
+                <a href="https://chat.whatsapp.com/EgT6dkBxyIA8vV4rGeoKiX?s=cl&p=i&mlu=4&ilr=4&iam=0" target="_blank" class="w-8 h-8 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center hover:bg-emerald-600 hover:text-white transition text-xs">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </a>
+                <a href="https://instagram.com" target="_blank" class="w-8 h-8 rounded-full bg-pink-50 text-pink-600 flex items-center justify-center hover:bg-pink-600 hover:text-white transition text-xs">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+                <button onclick="toggleMobileMenu()" class="lg:hidden w-9 h-9 bg-brand-light text-brand rounded-lg flex items-center justify-center hover:bg-brand hover:text-white transition">
+          <i class="fa-solid fa-bars text-lg"></i>
+        </button>
+            </div>
+
+        </div>
+
+        <!-- Main Navigation Menu -->
+        <nav class="hidden lg:block bg-brand-dark text-white border-t border-blue-900">
+            <div class="max-w-7xl mx-auto px-4 flex items-center justify-between overflow-x-auto custom-scrollbar">
+                <ul class="flex space-x-1 text-xs font-bold uppercase tracking-wider py-1.5">
+                    <li><button onclick="switchTab('home')" class="nav-btn active px-3 py-2 rounded-lg hover:bg-brand/80 transition flex items-center gap-1.5"><i class="fa-solid fa-house"></i> Home</button></li>
+                    <li><button onclick="switchTab('songs')" class="nav-btn px-3 py-2 rounded-lg hover:bg-brand/80 transition flex items-center gap-1.5"><i class="fa-solid fa-music"></i> Latest Songs</button></li>
+                    <li><button onclick="switchTab('news')" class="nav-btn px-3 py-2 rounded-lg hover:bg-brand/80 transition flex items-center gap-1.5"><i class="fa-solid fa-newspaper"></i> Music News</button></li>
+                    <li><button onclick="switchTab('artists')" class="nav-btn px-3 py-2 rounded-lg hover:bg-brand/80 transition flex items-center gap-1.5"><i class="fa-solid fa-user-astronaut"></i> Artists</button></li>
+                    <li><button onclick="switchTab('events')" class="nav-btn px-3 py-2 rounded-lg hover:bg-brand/80 transition flex items-center gap-1.5"><i class="fa-solid fa-calendar-days"></i> Events & Festivals</button></li>
+                    <li><button onclick="switchTab('videos')" class="nav-btn px-3 py-2 rounded-lg hover:bg-brand/80 transition flex items-center gap-1.5"><i class="fa-solid fa-circle-play"></i> Music Videos</button></li>
+                    <li><button onclick="switchTab('ceo')" class="nav-btn px-3 py-2 rounded-lg hover:bg-brand/80 transition flex items-center gap-1.5"><i class="fa-solid fa-crown text-amber-400"></i> CEO Profile</button></li>
+                </ul>
+                <button onclick="promptAdminLogin()" class="text-xs bg-brand text-white px-3 py-1.5 rounded-lg hover:bg-blue-600 font-semibold transition flex items-center gap-1">
+          <i class="fa-solid fa-shield-halved"></i> Admin Portal
+        </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Mobile Dropdown Menu -->
+    <div id="mobile-menu" class="hidden lg:hidden bg-brand-dark text-white border-b border-blue-900 px-4 py-4 space-y-2 text-sm font-semibold">
+        <div class="mb-3 relative">
+            <input id="mobile-search-input" onkeyup="handleGlobalSearch(event)" type="text" placeholder="Search music or articles..." class="w-full pl-9 pr-4 py-2 bg-blue-950/60 text-white placeholder-blue-300 rounded-lg text-xs border border-blue-800 focus:outline-none focus:border-brand">
+            <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-blue-300 text-xs"></i>
+        </div>
+        <button onclick="switchTab('home'); toggleMobileMenu()" class="block w-full text-left py-2 px-3 rounded hover:bg-brand"><i class="fa-solid fa-house mr-2"></i> Home</button>
+        <button onclick="switchTab('songs'); toggleMobileMenu()" class="block w-full text-left py-2 px-3 rounded hover:bg-brand"><i class="fa-solid fa-music mr-2"></i> Latest Songs</button>
+        <button onclick="switchTab('news'); toggleMobileMenu()" class="block w-full text-left py-2 px-3 rounded hover:bg-brand"><i class="fa-solid fa-newspaper mr-2"></i> Music News & Entertainment</button>
+        <button onclick="switchTab('artists'); toggleMobileMenu()" class="block w-full text-left py-2 px-3 rounded hover:bg-brand"><i class="fa-solid fa-user-astronaut mr-2"></i> Ghanaian & African Artists</button>
+        <button onclick="switchTab('events'); toggleMobileMenu()" class="block w-full text-left py-2 px-3 rounded hover:bg-brand"><i class="fa-solid fa-calendar-days mr-2"></i> Events (Bakatue Festival)</button>
+        <button onclick="switchTab('videos'); toggleMobileMenu()" class="block w-full text-left py-2 px-3 rounded hover:bg-brand"><i class="fa-solid fa-circle-play mr-2"></i> Music Videos</button>
+        <button onclick="switchTab('ceo'); toggleMobileMenu()" class="block w-full text-left py-2 px-3 rounded hover:bg-brand"><i class="fa-solid fa-crown text-amber-400 mr-2"></i> About King Fresh (CEO)</button>
+        <button onclick="promptAdminLogin(); toggleMobileMenu()" class="block w-full text-left py-2 px-3 rounded bg-brand text-white font-bold"><i class="fa-solid fa-shield-halved mr-2"></i> Admin Portal (Password Protected)</button>
+    </div>
+
+    <!-- BREAKING NEWS TICKER -->
+    <div class="bg-brand text-white text-xs font-semibold flex items-center border-b border-blue-400/30 overflow-hidden shadow-inner">
+        <div class="bg-brand-dark px-4 py-2 font-black uppercase text-[11px] flex items-center shrink-0 z-10 shadow-md">
+            <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse mr-2"></span> BREAKING
+        </div>
+        <div class="overflow-hidden py-1.5 w-full relative">
+            <div id="ticker-content" class="animate-marquee">
+                🔥 King Fresh drops new Afrobeats Anthem "Banger Season" featuring Stonebwoy! &nbsp;&nbsp;•&nbsp;&nbsp; 🌊 Bakatue Fishing Festival dates announced for Elmina, Central Region. &nbsp;&nbsp;•&nbsp;&nbsp; 🏆 Black Sherif wins Best African Music Act at International
+                Music Awards. &nbsp;&nbsp;•&nbsp;&nbsp; 🎵 Download the official Ghana Gospel Hits Compilation now on Boligeria Blog.
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= MAIN CONTENT WRAPPER ================= -->
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 py-6">
+
+        <!-- TAB 1: HOME PAGE -->
+        <div id="tab-home" class="tab-content space-y-8">
+
+            <!-- HERO FEATURED SLIDER -->
+            <section class="relative rounded-2xl overflow-hidden bg-brand-dark text-white shadow-xl">
+                <div id="hero-slider-container" class="relative min-h-[380px] sm:min-h-[440px] flex items-center">
+                    <img id="hero-bg-img" src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1200&q=80" class="absolute inset-0 w-full h-full object-cover opacity-35 mix-blend-overlay transition-all duration-700" alt="Music Hero Banner">
+
+                    <div class="absolute inset-0 bg-gradient-to-r from-brand-dark via-brand-dark/90 to-transparent p-6 sm:p-10 flex flex-col justify-center max-w-2xl z-10">
+                        <span id="hero-tag" class="inline-block bg-brand text-white font-black text-xs px-3 py-1 rounded-full uppercase tracking-widest w-max mb-3 shadow">
+              FEATURED SPOTLIGHT
+            </span>
+                        <h2 id="hero-title" class="text-2xl sm:text-4xl font-extrabold leading-tight tracking-tight mb-3">
+                            King Fresh Announces International 'African Wave' Tour
+                        </h2>
+                        <p id="hero-desc" class="text-slate-200 text-sm sm:text-base line-clamp-3 mb-6 leading-relaxed">
+                            King Fresh (Razak), Founder and CEO of King Fresh Music, has officially revealed details for his multi-city concert tour spanning Accra, London, and Lagos.
+                        </p>
+                        <div class="flex flex-wrap items-center gap-3">
+                            <button id="hero-primary-btn" onclick="switchTab('news')" class="bg-brand hover:bg-blue-600 text-white px-5 py-2.5 rounded-xl font-bold text-sm shadow-lg hover:shadow-brand/40 transition flex items-center gap-2">
+                <i class="fa-solid fa-newspaper"></i> Read Full Article
+              </button>
+                            <button id="hero-secondary-btn" onclick="playSong(0)" class="bg-white/10 hover:bg-white/20 text-white border border-white/30 px-5 py-2.5 rounded-xl font-bold text-sm backdrop-blur-sm transition flex items-center gap-2">
+                <i class="fa-solid fa-circle-play text-brand-light"></i> Listen to Banger Season
+              </button>
+                        </div>
+                    </div>
+
+                    <!-- Slide Controls -->
+                    <div class="absolute bottom-4 right-4 z-20 flex space-x-2">
+                        <button onclick="prevHeroSlide()" class="w-10 h-10 rounded-full bg-white/20 hover:bg-brand text-white flex items-center justify-center backdrop-blur-md transition">
+              <i class="fa-solid fa-chevron-left"></i>
+            </button>
+                        <button onclick="nextHeroSlide()" class="w-10 h-10 rounded-full bg-white/20 hover:bg-brand text-white flex items-center justify-center backdrop-blur-md transition">
+              <i class="fa-solid fa-chevron-right"></i>
+            </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- MUSIC GENRE QUICK CATEGORIES -->
+            <section class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-extrabold text-base text-brand-dark uppercase tracking-wider flex items-center gap-2">
+                        <i class="fa-solid fa-layer-group text-brand"></i> Explore Categories
+                    </h3>
+                    <button onclick="switchTab('songs')" class="text-brand font-bold text-xs hover:underline">View All Music →</button>
+                </div>
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
+                    <button onclick="filterSongsByGenre('Afrobeats')" class="p-3 bg-brand-light hover:bg-brand hover:text-white rounded-xl text-center font-bold text-xs transition border border-blue-100 group">
+            <i class="fa-solid fa-drum text-brand group-hover:text-white text-lg block mb-1"></i>
+            Afrobeats
+          </button>
+                    <button onclick="filterSongsByGenre('Ghana Highlife')" class="p-3 bg-brand-light hover:bg-brand hover:text-white rounded-xl text-center font-bold text-xs transition border border-blue-100 group">
+            <i class="fa-solid fa-guitar text-brand group-hover:text-white text-lg block mb-1"></i>
+            Ghana Highlife
+          </button>
+                    <button onclick="filterSongsByGenre('Hip-Hop / Drill')" class="p-3 bg-brand-light hover:bg-brand hover:text-white rounded-xl text-center font-bold text-xs transition border border-blue-100 group">
+            <i class="fa-solid fa-microphone-lines text-brand group-hover:text-white text-lg block mb-1"></i>
+            Hip-Hop / Drill
+          </button>
+                    <button onclick="filterSongsByGenre('Ghana Gospel')" class="p-3 bg-brand-light hover:bg-brand hover:text-white rounded-xl text-center font-bold text-xs transition border border-blue-100 group">
+            <i class="fa-solid fa-hands-praying text-brand group-hover:text-white text-lg block mb-1"></i>
+            Ghana Gospel
+          </button>
+                    <button onclick="filterSongsByGenre('Reggae / Dancehall')" class="p-3 bg-brand-light hover:bg-brand hover:text-white rounded-xl text-center font-bold text-xs transition border border-blue-100 group">
+            <i class="fa-solid fa-compact-disc text-brand group-hover:text-white text-lg block mb-1"></i>
+            Reggae / Dancehall
+          </button>
+                </div>
+            </section>
+
+            <!-- LATEST MUSIC RELEASES SECTION -->
+            <section>
+                <div class="flex flex-wrap items-center justify-between mb-4 gap-2">
+                    <div>
+                        <h3 class="font-extrabold text-xl text-brand-dark flex items-center gap-2">
+                            <i class="fa-solid fa-circle-nodes text-brand"></i> Latest Music Releases
+                        </h3>
+                        <p class="text-xs text-slate-500">Stream and download high-quality MP3 tracks</p>
+                    </div>
+                    <div class="flex space-x-2 text-xs">
+                        <button onclick="renderSongGrid('all')" class="bg-brand text-white px-3 py-1.5 rounded-lg font-bold">All</button>
+                        <button onclick="renderSongGrid('trending')" class="bg-white hover:bg-brand-light border border-slate-200 text-slate-700 px-3 py-1.5 rounded-lg font-bold transition">Trending</button>
+                        <button onclick="switchTab('songs')" class="bg-white hover:bg-brand-light border border-slate-200 text-slate-700 px-3 py-1.5 rounded-lg font-bold transition">Explore All</button>
+                    </div>
+                </div>
+
+                <div id="home-songs-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <!-- Dynamically Generated via JS -->
+                </div>
+            </section>
+
+            <!-- TWO-COLUMN SECTION: NEWS BLOG & TOP DOWNLOAD CHARTS -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+                <!-- Left 2 Cols: Latest News Articles -->
+                <div class="lg:col-span-2 space-y-4">
+                    <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+                        <h3 class="font-extrabold text-xl text-brand-dark flex items-center gap-2">
+                            <i class="fa-solid fa-newspaper text-brand"></i> Entertainment & News
+                        </h3>
+                        <button onclick="switchTab('news')" class="text-brand font-bold text-xs hover:underline">More News →</button>
+                    </div>
+
+                    <div id="home-news-container" class="space-y-4">
+                        <!-- Dynamically populated articles -->
+                    </div>
+                </div>
+
+                <!-- Right 1 Col: Top Chart & Festival Banner -->
+                <div class="space-y-6">
+
+                    <!-- Bakatue Festival Spotlight Widget -->
+                    <div class="bg-gradient-to-br from-brand-dark to-brand text-white rounded-2xl p-5 shadow-lg relative overflow-hidden">
+                        <div class="absolute -right-4 -bottom-4 opacity-10 text-8xl font-black">
+                            <i class="fa-solid fa-water"></i>
+                        </div>
+                        <span class="bg-amber-400 text-brand-dark font-black text-[10px] uppercase px-2.5 py-1 rounded-full tracking-wider mb-2 inline-block">
+              GHANA CULTURAL FEATURE
+            </span>
+                        <h4 class="font-extrabold text-lg leading-snug mb-2">
+                            Bakatue Fishing Festival 2026: Elmina Prepares for Royal Celebrations
+                        </h4>
+                        <p class="text-xs text-blue-100 mb-4 line-clamp-3">
+                            The chiefs and people of Elmina Traditional Area gear up for the sacred Bakatue Fishing Festival, honoring ancient maritime heritage with royal regattas and music performance setups.
+                        </p>
+                        <div class="flex items-center justify-between text-xs pt-2 border-t border-blue-400/30">
+                            <span class="text-amber-300 font-bold"><i class="fa-solid fa-location-dot mr-1"></i> Elmina, Central Region</span>
+                            <button onclick="switchTab('events')" class="bg-white text-brand-dark font-bold px-3 py-1.5 rounded-lg hover:bg-brand-light transition">Read Article</button>
+                        </div>
+                    </div>
+
+                    <!-- Top Downloaded Chart -->
+                    <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm">
+                        <h4 class="font-extrabold text-base text-brand-dark mb-4 flex items-center justify-between">
+                            <span><i class="fa-solid fa-fire text-orange-500 mr-2"></i> Top Downloaded Tracks</span>
+                            <span class="text-[10px] text-slate-400 font-normal uppercase">Weekly Chart</span>
+                        </h4>
+                        <div id="top-chart-list" class="space-y-3">
+                            <!-- JS Populated -->
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- FEATURED ARTISTS CAROUSEL / GRID -->
+            <section class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                <div class="flex items-center justify-between mb-6">
+                    <div>
+                        <h3 class="font-extrabold text-xl text-brand-dark flex items-center gap-2">
+                            <i class="fa-solid fa-user-astronaut text-brand"></i> Featured Artists
+                        </h3>
+                        <p class="text-xs text-slate-500">Discover Ghanaian & African music icons</p>
+                    </div>
+                    <button onclick="switchTab('artists')" class="text-brand font-bold text-xs hover:underline">View All Artists →</button>
+                </div>
+
+                <div id="home-artists-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                    <!-- JS Rendered -->
+                </div>
+            </section>
+
+        </div>
+
+        <!-- TAB 2: LATEST SONGS PAGE -->
+        <div id="tab-songs" class="tab-content space-y-6 hidden">
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+                    <div>
+                        <h2 class="text-2xl font-black text-brand-dark">Complete Music Library</h2>
+                        <p class="text-xs text-slate-500">Stream or download original tracks from top African artists</p>
+                    </div>
+                    <!-- Genre & Sorting Filters -->
+                    <div class="flex flex-wrap items-center gap-2">
+                        <select id="genre-filter" onchange="applySongFilters()" class="bg-brand-bg text-xs font-bold border border-slate-200 rounded-xl px-3 py-2 text-slate-700 focus:outline-none focus:border-brand">
+              <option value="ALL">All Genres</option>
+              <option value="Afrobeats">Afrobeats</option>
+              <option value="Ghana Highlife">Ghana Highlife</option>
+              <option value="Hip-Hop / Drill">Hip-Hop / Drill</option>
+              <option value="Ghana Gospel">Ghana Gospel</option>
+              <option value="Reggae / Dancehall">Reggae / Dancehall</option>
+            </select>
+                        <select id="sort-filter" onchange="applySongFilters()" class="bg-brand-bg text-xs font-bold border border-slate-200 rounded-xl px-3 py-2 text-slate-700 focus:outline-none focus:border-brand">
+              <option value="latest">Latest Releases</option>
+              <option value="popular">Most Streamed</option>
+              <option value="downloads">Most Downloaded</option>
+            </select>
+                    </div>
+                </div>
+
+                <div id="all-songs-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <!-- JS Populated -->
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 3: NEWS & ARTICLES -->
+        <div id="tab-news" class="tab-content space-y-6 hidden">
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+                    <div>
+                        <h2 class="text-2xl font-black text-brand-dark">Boligeria Entertainment News</h2>
+                        <p class="text-xs text-slate-500">Authentic reporting on music, culture, and celebrity updates in Ghana</p>
+                    </div>
+                    <div class="flex gap-2">
+                        <button onclick="filterNewsCategory('ALL')" class="bg-brand text-white text-xs px-3 py-1.5 rounded-lg font-bold">All News</button>
+                        <button onclick="filterNewsCategory('GHANA ENTERTAINMENT')" class="bg-brand-bg text-slate-700 text-xs px-3 py-1.5 rounded-lg font-bold hover:bg-brand-light">Ghana Ent.</button>
+                        <button onclick="filterNewsCategory('CULTURAL FESTIVALS')" class="bg-brand-bg text-slate-700 text-xs px-3 py-1.5 rounded-lg font-bold hover:bg-brand-light">Festivals</button>
+                    </div>
+                </div>
+
+                <div id="all-news-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- JS Populated -->
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 4: ARTISTS DIRECTORY -->
+        <div id="tab-artists" class="tab-content space-y-6 hidden">
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                <div class="mb-6">
+                    <h2 class="text-2xl font-black text-brand-dark">Artist Roster & Profiles</h2>
+                    <p class="text-xs text-slate-500">Explore biographies, discography, and official links of featured musicians</p>
+                </div>
+                <div id="all-artists-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    <!-- JS Populated -->
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 5: EVENTS & FESTIVALS (INCLUDING BAKATUE FESTIVAL) -->
+        <div id="tab-events" class="tab-content space-y-6 hidden">
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                <div class="mb-6 border-b border-slate-200 pb-4">
+                    <span class="bg-brand-light text-brand font-extrabold text-[10px] px-2.5 py-1 rounded-full uppercase tracking-wider">CULTURAL SPOTLIGHT</span>
+                    <h2 class="text-2xl font-black text-brand-dark mt-2">Bakatue Fishing Festival & Major Events</h2>
+                    <p class="text-xs text-slate-500">Celebrations, concerts, and live entertainment schedules across Ghana</p>
+                </div>
+
+                <!-- BAKATUE FESTIVAL FEATURE HIGHLIGHT -->
+                <div class="bg-gradient-to-r from-brand-dark via-blue-900 to-brand text-white rounded-2xl p-6 shadow-xl mb-8">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+                        <div class="md:col-span-2 space-y-3">
+                            <span class="bg-amber-400 text-brand-dark font-black text-xs px-3 py-1 rounded-full uppercase">
+                Annual Elmina Festival
+              </span>
+                            <h3 class="text-2xl sm:text-3xl font-black leading-tight">
+                                Elmina Bakatue Fishing Festival 2026
+                            </h3>
+                            <p class="text-xs sm:text-sm text-blue-100 leading-relaxed">
+                                Bakatue is celebrated by the chiefs and people of Elmina in the Central Region of Ghana. The word Bakatue translates to "the opening of the lagoon". The festival invokes divine blessings from ancestors for a rich fishing season and protection for fishermen.
+                                Activities include royal boat regattas, traditional rituals, and a grand music festival hosted by King Fresh Music.
+                            </p>
+                            <div class="flex flex-wrap gap-4 text-xs font-semibold pt-2 text-amber-200">
+                                <span><i class="fa-solid fa-calendar mr-1"></i> July 2026 (Annual Ceremony)</span>
+                                <span><i class="fa-solid fa-location-dot mr-1"></i> Benya Lagoon, Elmina</span>
+                                <span><i class="fa-solid fa-ticket mr-1"></i> Free Public Admission</span>
+                            </div>
+                        </div>
+                        <div class="bg-white/10 p-4 rounded-xl border border-white/20 backdrop-blur-md text-center space-y-3">
+                            <i class="fa-solid fa-water text-5xl text-amber-300"></i>
+                            <h4 class="font-black text-sm uppercase">King Fresh Live Stage</h4>
+                            <p class="text-[11px] text-blue-100">Live concert performances featuring King Fresh, Stonebwoy, and local highlife legends.</p>
+                            <button onclick="openModal('event-modal')" class="w-full bg-amber-400 hover:bg-amber-300 text-brand-dark font-black py-2 rounded-lg text-xs transition">
+                View Festival Details
+              </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- UPCOMING EVENTS LIST -->
+                <h3 class="font-extrabold text-lg text-brand-dark mb-4">Upcoming Entertainment & Concert Events</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="p-4 border border-slate-200 rounded-xl flex gap-4 bg-brand-bg/50 items-center">
+                        <div class="w-16 h-16 bg-brand text-white rounded-xl flex flex-col items-center justify-center font-black shrink-0">
+                            <span class="text-xs">DEC</span>
+                            <span class="text-xl">24</span>
+                        </div>
+                        <div>
+                            <span class="text-[10px] font-extrabold text-brand uppercase">Accra Beach Arena</span>
+                            <h4 class="font-bold text-sm text-brand-dark">King Fresh African Wave Concert</h4>
+                            <p class="text-xs text-slate-500">Massive year-end Afrobeats celebration in Greater Accra.</p>
+                        </div>
+                    </div>
+
+                    <div class="p-4 border border-slate-200 rounded-xl flex gap-4 bg-brand-bg/50 items-center">
+                        <div class="w-16 h-16 bg-brand-dark text-white rounded-xl flex flex-col items-center justify-center font-black shrink-0">
+                            <span class="text-xs">MAY</span>
+                            <span class="text-xl">15</span>
+                        </div>
+                        <div>
+                            <span class="text-[10px] font-extrabold text-brand uppercase">Kumasi Cultural Center</span>
+                            <h4 class="font-bold text-sm text-brand-dark">Kumerica Drill & Highlife Night</h4>
+                            <p class="text-xs text-slate-500">Showcasing Ashanti Region's top hip-hop and highlife talents.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- TAB 6: MUSIC VIDEOS -->
+        <div id="tab-videos" class="tab-content space-y-6 hidden">
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                <div class="mb-6">
+                    <h2 class="text-2xl font-black text-brand-dark">Official Music Videos</h2>
+                    <p class="text-xs text-slate-500">Watch high-definition music videos and studio performances</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-brand-bg rounded-xl overflow-hidden border border-slate-200 shadow-sm group">
+                        <div class="relative aspect-video bg-slate-900 flex items-center justify-center">
+                            <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover opacity-80" alt="Video Thumbnail">
+                            <div class="absolute inset-0 bg-brand-dark/40 flex items-center justify-center group-hover:bg-brand-dark/20 transition">
+                                <div class="w-12 h-12 bg-brand text-white rounded-full flex items-center justify-center text-lg shadow-lg group-hover:scale-110 transition">
+                                    <i class="fa-solid fa-play ml-1"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <span class="text-[10px] font-bold text-brand uppercase">OFFICIAL VIDEO</span>
+                            <h3 class="font-bold text-sm text-brand-dark mt-1">King Fresh ft. Stonebwoy - Banger Season</h3>
+                            <p class="text-xs text-slate-500 mt-1">45K Views • Directed by Boligeria Films</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-brand-bg rounded-xl overflow-hidden border border-slate-200 shadow-sm group">
+                        <div class="relative aspect-video bg-slate-900 flex items-center justify-center">
+                            <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover opacity-80" alt="Video Thumbnail">
+                            <div class="absolute inset-0 bg-brand-dark/40 flex items-center justify-center group-hover:bg-brand-dark/20 transition">
+                                <div class="w-12 h-12 bg-brand text-white rounded-full flex items-center justify-center text-lg shadow-lg group-hover:scale-110 transition">
+                                    <i class="fa-solid fa-play ml-1"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <span class="text-[10px] font-bold text-brand uppercase">PERFORMANCE</span>
+                            <h3 class="font-bold text-sm text-brand-dark mt-1">Black Sherif - Kumerica Anthem Live</h3>
+                            <p class="text-xs text-slate-500 mt-1">120K Views • Live in Accra</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 7: CEO PROFILE PAGE -->
+        <div id="tab-ceo" class="tab-content space-y-6 hidden">
+            <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm">
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+
+                    <!-- CEO Photo Card -->
+                    <div class="bg-gradient-to-b from-brand-light to-white p-4 rounded-2xl border border-blue-100 text-center shadow-sm">
+                        <div class="relative w-48 h-48 mx-auto mb-4 rounded-2xl overflow-hidden border-4 border-white shadow-md">
+                            <img src="kingfresh.png" alt="King Fresh (Razak) CEO" class="w-full h-full object-cover">
+                        </div>
+                        <h2 class="text-xl font-extrabold text-brand-dark">King Fresh (Razak)</h2>
+                        <p class="text-xs font-bold text-brand uppercase tracking-wider mt-0.5">Founder & CEO</p>
+                        <p class="text-xs text-slate-500 mt-2">KING FRESH MUSIC & BOLIGERIA BLOG</p>
+
+                        <div class="flex justify-center space-x-3 mt-4 pt-4 border-t border-slate-200 text-brand">
+                            <a href="#" class="w-8 h-8 rounded-full bg-brand-light flex items-center justify-center hover:bg-brand hover:text-white transition"><i class="fa-brands fa-twitter"></i></a>
+                            <a href="#" class="w-8 h-8 rounded-full bg-brand-light flex items-center justify-center hover:bg-brand hover:text-white transition"><i class="fa-brands fa-instagram"></i></a>
+                            <a href="#" class="w-8 h-8 rounded-full bg-brand-light flex items-center justify-center hover:bg-brand hover:text-white transition"><i class="fa-brands fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- CEO Biography & Vision -->
+                    <div class="md:col-span-2 space-y-5">
+                        <div>
+                            <span class="bg-brand-light text-brand font-black text-xs px-3 py-1 rounded-full uppercase">LEADERSHIP PROFILE</span>
+                            <h2 class="text-2xl sm:text-3xl font-black text-brand-dark mt-2">Message From The Founder</h2>
+                        </div>
+
+                        <div class="prose prose-slate text-sm leading-relaxed space-y-4 text-slate-700">
+                            <p class="font-medium text-brand-dark text-base border-l-4 border-brand pl-4 py-1 italic bg-brand-light/50 rounded-r-lg">
+                                "Our mission is to give Ghanaian and African music talents an uncompromised global platform, while delivering fast, accurate entertainment journalism to our audience."
+                            </p>
+
+                            <p>
+                                <strong>King Fresh (Razak)</strong> is the visionary founder of <strong>KING FRESH MUSIC</strong> and <strong>BOLIGERIA BLOG</strong>. Based in Ghana, Razak established the platform to bridge the gap between talented emerging
+                                African artists and music enthusiasts around the world.
+                            </p>
+
+                            <p>
+                                With a deep background in music distribution, media publishing, and cultural event curation, King Fresh has grown Boligeria Blog into a trusted destination for MP3 downloads, celebrity breaking news, cultural festival spotlights (such as the annual Bakatue
+                                Fishing Festival), and exclusive artist interviews.
+                            </p>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                                <div class="p-4 bg-brand-bg rounded-xl border border-slate-200">
+                                    <h4 class="font-extrabold text-brand-dark text-sm mb-1"><i class="fa-solid fa-bullseye text-brand mr-2"></i> Vision</h4>
+                                    <p class="text-xs text-slate-600">To build Africa's most accessible, reliable music streaming and entertainment news network.</p>
+                                </div>
+                                <div class="p-4 bg-brand-bg rounded-xl border border-slate-200">
+                                    <h4 class="font-extrabold text-brand-dark text-sm mb-1"><i class="fa-solid fa-handshake text-brand mr-2"></i> Artist Support</h4>
+                                    <p class="text-xs text-slate-600">Providing royalty-fair promotion, media coverage, and event opportunities for upcoming musicians.</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <!-- TAB 8: ADMIN DASHBOARD (PROTECTED) -->
+        <div id="tab-admin" class="tab-content space-y-6 hidden">
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+
+                <div class="flex flex-wrap items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-200">
+                    <div>
+                        <span class="bg-emerald-100 text-emerald-800 font-extrabold text-[10px] px-2.5 py-1 rounded-full uppercase tracking-wider">
+              <i class="fa-solid fa-shield-check mr-1"></i> Authenticated Session
+            </span>
+                        <h2 class="text-2xl font-black text-brand-dark mt-1">Administrator Control Center</h2>
+                    </div>
+                    <div class="flex gap-2">
+                        <button onclick="lockAdminPortal()" class="bg-red-50 text-red-600 hover:bg-red-100 font-bold text-xs px-3 py-2 rounded-xl border border-red-200 transition flex items-center gap-1">
+              <i class="fa-solid fa-lock"></i> Lock Admin Portal
+            </button>
+                        <button onclick="openModal('add-song-modal')" class="bg-brand text-white font-bold text-xs px-4 py-2 rounded-xl hover:bg-blue-600 transition flex items-center gap-1">
+              <i class="fa-solid fa-plus"></i> Upload New Song
+            </button>
+                    </div>
+                </div>
+
+                <!-- STATS OVERVIEW CARDS -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                    <div class="p-4 bg-brand-light rounded-xl border border-blue-100">
+                        <span class="text-xs text-brand font-bold uppercase">Total Songs</span>
+                        <div class="text-2xl font-black text-brand-dark mt-1" id="stat-total-songs">5</div>
+                    </div>
+                    <div class="p-4 bg-brand-light rounded-xl border border-blue-100">
+                        <span class="text-xs text-brand font-bold uppercase">Total Articles</span>
+                        <div class="text-2xl font-black text-brand-dark mt-1" id="stat-total-articles">4</div>
+                    </div>
+                    <div class="p-4 bg-brand-light rounded-xl border border-blue-100">
+                        <span class="text-xs text-brand font-bold uppercase">Total Streams</span>
+                        <div class="text-2xl font-black text-brand-dark mt-1">18,500</div>
+                    </div>
+                    <div class="p-4 bg-brand-light rounded-xl border border-blue-100">
+                        <span class="text-xs text-brand font-bold uppercase">MP3 Downloads</span>
+                        <div class="text-2xl font-black text-brand-dark mt-1">53,300</div>
+                    </div>
+                </div>
+
+                <!-- QUICK MANAGEMENT MODULES -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                    <!-- Publish News Form -->
+                    <div class="p-5 border border-slate-200 rounded-xl bg-brand-bg/30 space-y-4">
+                        <h3 class="font-extrabold text-base text-brand-dark border-b border-slate-200 pb-2">
+                            <i class="fa-solid fa-pen-to-square text-brand mr-2"></i> Publish News Article
+                        </h3>
+                        <form onsubmit="handleAdminPublishArticle(event)" class="space-y-3">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Headline</label>
+                                <input type="text" id="admin-news-title" required class="w-full p-2 bg-white border border-slate-200 rounded-lg text-xs focus:outline-none focus:border-brand">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Category</label>
+                                <select id="admin-news-category" class="w-full p-2 bg-white border border-slate-200 rounded-lg text-xs font-semibold">
+                  <option value="GHANA ENTERTAINMENT">GHANA ENTERTAINMENT</option>
+                  <option value="MUSIC INDUSTRY">MUSIC INDUSTRY</option>
+                  <option value="CULTURAL FESTIVALS">CULTURAL FESTIVALS</option>
+                  <option value="CELEBRITY GOSSIP">CELEBRITY GOSSIP</option>
+                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Article Content Snippet</label>
+                                <textarea id="admin-news-content" rows="3" required class="w-full p-2 bg-white border border-slate-200 rounded-lg text-xs focus:outline-none focus:border-brand"></textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-brand text-white font-bold py-2 rounded-lg text-xs hover:bg-blue-600 transition">
+                Publish Article to Blog
+              </button>
+                        </form>
+                    </div>
+
+                    <!-- Ticker Announcement Updates -->
+                    <div class="p-5 border border-slate-200 rounded-xl bg-brand-bg/30 space-y-4">
+                        <h3 class="font-extrabold text-base text-brand-dark border-b border-slate-200 pb-2">
+                            <i class="fa-solid fa-scroll text-brand mr-2"></i> Update Breaking Marquee Ticker
+                        </h3>
+                        <div class="space-y-3">
+                            <p class="text-xs text-slate-600">Update headline announcements scrolling at top of site:</p>
+                            <textarea id="admin-ticker-input" rows="4" class="w-full p-2 bg-white border border-slate-200 rounded-lg text-xs focus:outline-none focus:border-brand">🔥 King Fresh drops new Afrobeats Anthem "Banger Season" featuring Stonebwoy! • 🌊 Bakatue Fishing Festival dates announced for Elmina, Central Region.</textarea>
+                            <button onclick="updateTickerText()" class="w-full bg-brand-dark text-white font-bold py-2 rounded-lg text-xs hover:bg-blue-900 transition">
+                Save & Update Ticker Banner
+              </button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="bg-brand-dark text-white pt-12 pb-8 border-t border-blue-900">
+        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+
+            <div class="space-y-3">
+                <div class="flex items-center space-x-2">
+                    <div class="w-9 h-9 bg-brand text-white font-black text-lg rounded-lg flex items-center justify-center">KF</div>
+                    <span class="font-black text-lg tracking-tight">KING FRESH MUSIC</span>
+                </div>
+                <p class="text-xs text-blue-200 leading-relaxed">
+                    Boligeria Blog Ghana is Africa's premier digital media platform dedicated to promoting high-quality African music, entertainment news, cultural festivals, and artist growth.
+                </p>
+            </div>
+
+            <div>
+                <h4 class="font-extrabold text-sm text-white uppercase tracking-wider mb-3">Quick Navigation</h4>
+                <ul class="space-y-2 text-xs text-blue-200">
+                    <li><button onclick="switchTab('home')" class="hover:text-white transition">Home Portal</button></li>
+                    <li><button onclick="switchTab('songs')" class="hover:text-white transition">Latest Song Downloads</button></li>
+                    <li><button onclick="switchTab('news')" class="hover:text-white transition">Entertainment News</button></li>
+                    <li><button onclick="switchTab('artists')" class="hover:text-white transition">Ghanaian Artists Directory</button></li>
+                    <li><button onclick="switchTab('events')" class="hover:text-white transition">Bakatue Fishing Festival</button></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-extrabold text-sm text-white uppercase tracking-wider mb-3">Music Categories</h4>
+                <ul class="space-y-2 text-xs text-blue-200">
+                    <li><button onclick="filterSongsByGenre('Afrobeats')" class="hover:text-white transition">Afrobeats Releases</button></li>
+                    <li><button onclick="filterSongsByGenre('Ghana Highlife')" class="hover:text-white transition">Ghana Highlife & Hiplife</button></li>
+                    <li><button onclick="filterSongsByGenre('Hip-Hop / Drill')" class="hover:text-white transition">Asakaa / Ghana Drill</button></li>
+                    <li><button onclick="filterSongsByGenre('Ghana Gospel')" class="hover:text-white transition">Ghanaian Gospel Worship</button></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-extrabold text-sm text-white uppercase tracking-wider mb-3">Newsletter Subscription</h4>
+                <p class="text-xs text-blue-200 mb-3">Subscribe to receive fresh MP3 drops and breaking news directly in your inbox.</p>
+                <form onsubmit="handleSubscribe(event)" class="space-y-2">
+                    <input type="email" placeholder="Your email address" required class="w-full px-3 py-2 bg-blue-950/80 border border-blue-800 rounded-lg text-xs text-white placeholder-blue-300 focus:outline-none focus:border-brand">
+                    <button type="submit" class="w-full bg-brand hover:bg-blue-600 text-white font-bold py-2 rounded-lg text-xs transition">Join Newsletter</button>
+                </form>
+            </div>
+
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 pt-6 border-t border-blue-900/60 flex flex-wrap justify-between items-center text-xs text-blue-300 gap-4">
+            <p>© 2026 KING FRESH MUSIC / BOLIGERIA BLOG. All rights reserved. Designed for Ghana & Global Africa.</p>
+            <div class="flex space-x-4">
+                <a href="#" class="hover:underline">Privacy Policy</a>
+                <a href="#" class="hover:underline">Terms of Service</a>
+                <button onclick="switchTab('ceo')" class="hover:underline">Founder Message</button>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ================= PERSISTENT AUDIO PLAYER BAR ================= -->
+    <div id="persistent-player" class="fixed bottom-0 left-0 right-0 bg-brand-dark/95 backdrop-blur-md text-white border-t border-blue-800 p-3 z-50 shadow-2xl">
+        <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+
+            <!-- Track Info -->
+            <div class="flex items-center space-x-3 w-1/3 min-w-0">
+                <img id="player-cover" src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=150&q=80" class="w-12 h-12 rounded-lg object-cover border border-blue-700 shrink-0" alt="Player Art">
+                <div class="min-w-0">
+                    <h4 id="player-title" class="font-bold text-xs sm:text-sm truncate">Banger Season</h4>
+                    <p id="player-artist" class="text-[11px] text-blue-200 truncate">King Fresh ft. Stonebwoy</p>
+                </div>
+            </div>
+
+            <!-- Center Controls & Scrub Progress -->
+            <div class="flex-1 max-w-md flex flex-col items-center">
+                <div class="flex items-center space-x-4 mb-1">
+                    <button onclick="prevSong()" class="text-blue-300 hover:text-white transition text-xs"><i class="fa-solid fa-backward-step"></i></button>
+                    <button id="player-play-btn" onclick="togglePlayPause()" class="w-9 h-9 bg-brand hover:bg-blue-500 text-white rounded-full flex items-center justify-center text-sm transition shadow-md">
+            <i id="play-icon" class="fa-solid fa-play ml-0.5"></i>
+          </button>
+                    <button onclick="nextSong()" class="text-blue-300 hover:text-white transition text-xs"><i class="fa-solid fa-forward-step"></i></button>
+                </div>
+
+                <div class="w-full flex items-center space-x-2 text-[10px] text-blue-300">
+                    <span id="player-current-time">0:00</span>
+                    <input id="player-progress" type="range" min="0" max="100" value="0" oninput="seekAudio(this.value)" class="w-full h-1 bg-blue-900 rounded-lg appearance-none cursor-pointer accent-brand">
+                    <span id="player-duration">0:00</span>
+                </div>
+            </div>
+
+            <!-- Download Trigger & Volume -->
+            <div class="flex items-center justify-end space-x-3 w-1/3">
+                <button id="player-download-btn" onclick="downloadCurrentSong()" class="bg-emerald-600 hover:bg-emerald-500 text-white px-3 py-1.5 rounded-lg font-bold text-xs transition flex items-center gap-1.5 shadow">
+          <i class="fa-solid fa-download"></i> <span class="hidden sm:inline">Download MP3</span>
+        </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Hidden HTML5 Audio Element -->
+    <audio id="audio-engine" preload="none"></audio>
+
+    <!-- ================= MODALS ================= -->
+
+    <!-- LOGIN / REGISTER MODAL -->
+    <div id="login-modal" class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-2xl max-w-sm w-full p-6 relative shadow-2xl space-y-4">
+            <button onclick="closeModal('login-modal')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+            <h3 class="text-xl font-extrabold text-brand-dark">User Account Portal</h3>
+            <p class="text-xs text-slate-500">Log in to bookmark songs, comment, and save your favorites.</p>
+
+            <form onsubmit="handleUserLogin(event)" class="space-y-3">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Email / Username</label>
+                    <input type="text" id="login-username" required class="w-full p-2.5 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-brand">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Password</label>
+                    <input type="password" required class="w-full p-2.5 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-brand">
+                </div>
+                <button type="submit" class="w-full bg-brand text-white font-bold py-2.5 rounded-xl text-xs hover:bg-blue-600 transition">Log In</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ADMIN PASSWORD MODAL -->
+    <div id="admin-password-modal" class="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-2xl max-w-sm w-full p-6 relative shadow-2xl space-y-4 border-2 border-brand">
+            <button onclick="closeModal('admin-password-modal')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+            <div class="text-center">
+                <div class="w-12 h-12 bg-brand-light text-brand rounded-full flex items-center justify-center mx-auto text-xl mb-2">
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+                <h3 class="text-xl font-extrabold text-brand-dark">Admin Password Required</h3>
+                <p class="text-xs text-slate-500 mt-1">Enter the administrator passcode to access control modules.</p>
+            </div>
+
+            <form onsubmit="verifyAdminPasscode(event)" class="space-y-3">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Passcode</label>
+                    <input type="password" id="admin-passcode-input" placeholder="Enter admin password..." required class="w-full p-2.5 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-brand text-center font-bold tracking-widest">
+                    <p id="admin-passcode-error" class="text-[11px] text-red-500 font-semibold mt-1 hidden text-center">Incorrect password. Please try again.</p>
+                </div>
+                <button type="submit" class="w-full bg-brand-dark text-white font-bold py-2.5 rounded-xl text-xs hover:bg-blue-900 transition">Unlock Admin Dashboard</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ADD SONG MODAL -->
+    <div id="add-song-modal" class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 relative shadow-2xl space-y-4">
+            <button onclick="closeModal('add-song-modal')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+            <h3 class="text-xl font-extrabold text-brand-dark">Upload New Song MP3</h3>
+
+            <form onsubmit="handleAdminUploadSong(event)" class="space-y-3">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Song Title</label>
+                    <input type="text" id="upload-song-title" required class="w-full p-2 border border-slate-200 rounded-lg text-xs focus:outline-none focus:border-brand">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Artist Name</label>
+                    <input type="text" id="upload-artist-name" required class="w-full p-2 border border-slate-200 rounded-lg text-xs focus:outline-none focus:border-brand">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Genre</label>
+                    <select id="upload-genre" class="w-full p-2 border border-slate-200 rounded-lg text-xs font-semibold">
+            <option value="Afrobeats">Afrobeats</option>
+            <option value="Ghana Highlife">Ghana Highlife</option>
+            <option value="Hip-Hop / Drill">Hip-Hop / Drill</option>
+            <option value="Ghana Gospel">Ghana Gospel</option>
+            <option value="Reggae / Dancehall">Reggae / Dancehall</option>
+          </select>
+                </div>
+                <button type="submit" class="w-full bg-brand text-white font-bold py-2.5 rounded-xl text-xs hover:bg-blue-600 transition">Publish Song</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ARTICLE VIEW MODAL -->
+    <div id="article-modal" class="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-2xl max-w-2xl w-full p-6 sm:p-8 relative shadow-2xl max-h-[90vh] overflow-y-auto custom-scrollbar space-y-4">
+            <button onclick="closeModal('article-modal')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-xl"></i></button>
+            <span id="modal-article-cat" class="bg-brand-light text-brand font-black text-[10px] px-2.5 py-1 rounded-full uppercase">ARTICLE</span>
+            <h2 id="modal-article-title" class="text-2xl font-black text-brand-dark leading-tight">Article Title</h2>
+            <p id="modal-article-meta" class="text-xs text-slate-400">By Boligeria Desk</p>
+            <img id="modal-article-img" src="" class="w-full h-64 object-cover rounded-xl border border-slate-200" alt="News Image">
+            <div id="modal-article-content" class="text-sm text-slate-700 leading-relaxed space-y-3">
+                <!-- Content inserted dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- EVENT DETAILS MODAL -->
+    <div id="event-modal" class="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-6 relative shadow-2xl space-y-4">
+            <button onclick="closeModal('event-modal')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-xl"></i></button>
+            <span class="bg-amber-100 text-amber-800 font-extrabold text-[10px] px-2.5 py-1 rounded-full uppercase">FESTIVAL GUIDE</span>
+            <h3 class="text-2xl font-black text-brand-dark">Bakatue Fishing Festival 2026</h3>
+            <p class="text-xs text-slate-600 leading-relaxed">
+                The Bakatue Fishing Festival takes place every year in July in the historic town of Elmina, Ghana. Highlights include traditional ceremonies to open the Benya Lagoon for fishing, colorful royal canoe regattas, and the King Fresh Music Live Stage featuring
+                Ghana's top artists.
+            </p>
+            <div class="p-3 bg-brand-bg rounded-xl border border-slate-200 text-xs space-y-1">
+                <p><strong>Venue:</strong> Benya Lagoon & Elmina Castle Grounds</p>
+                <p><strong>Organizers:</strong> Elmina Traditional Council & Boligeria Media</p>
+            </div>
+            <button onclick="closeModal('event-modal')" class="w-full bg-brand text-white font-bold py-2 rounded-lg text-xs">Close</button>
+        </div>
+    </div>
+
+    <!-- ================= JAVASCRIPT APPLICATION LOGIC ================= -->
+    <script>
+        // Global Application State Data
+        let songsData = [{
+            id: 0,
+            title: "back to sender",
+            artist: "Salusa Bwoy ft. Rulling King",
+            genre: "Afrobeats",
+            cover: "back.jpg",
+            audioUrl: "https://cdn.imageurlgenerator.com/uploads/7768f988-d418-4037-a94c-94924075b6c2.mp3",
+            streams: 100,
+            downloads: 20
+        }, {
+            id: 1,
+            title: "Boligeria Remix",
+            artist: "saxces ft The Biggest, Rulling King, Nasty Bwoy, G Bwoy, Gammer",
+            genre: "afro",
+            cover: "b.jpg",
+            audioUrl: "https://cdn.imageurlgenerator.com/uploads/89d944f2-a872-40bc-baa8-772a7101fef4.mp3",
+            streams: 9800,
+            downloads: 3800
+        }, {
+            id: 2,
+            title: "level city",
+            artist: "The biggest",
+            genre: "singing",
+            cover: "levelcity.jpg",
+            audioUrl: "https://cdn.imageurlgenerator.com/uploads/89d944f2-a872-40bc-baa8-772a7101fef4.mp3",
+            streams: 18900,
+            downloads: 6100
+        }, {
+            id: 3,
+            title: "Elmina Bakatue Reggae",
+            artist: "Shatta Wale",
+            genre: "Reggae / Dancehall",
+            cover: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=600&q=80",
+            audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3",
+            streams: 8100,
+            downloads: 2900
+        }, {
+            id: 4,
+            title: "Highlife Heritage",
+            artist: "King Fresh & Kwabena Kwabena",
+            genre: "Ghana Highlife",
+            cover: "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?auto=format&fit=crop&w=600&q=80",
+            audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3",
+            streams: 4300,
+            downloads: 1500
+        }];
+
+        let newsArticles = [{
+            id: 0,
+            title: "King Fresh Announces International 'African Wave' Tour 2026",
+            category: "GHANA ENTERTAINMENT",
+            author: "Boligeria Editor",
+            date: "March 14, 2026",
+            img: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=800&q=80",
+            snippet: "King Fresh (Razak), Founder and CEO of King Fresh Music, has officially revealed details for his multi-city concert tour spanning Accra, London, and Lagos. The tour aims to celebrate African music diversity and promote young Ghanaian talent.",
+            content: "King Fresh (Razak), Founder and CEO of King Fresh Music, has officially revealed details for his multi-city concert tour spanning Accra, London, and Lagos. The tour aims to celebrate African music diversity and promote young Ghanaian talent. The tour will highlight emerging highlife and Afrobeats producers from Ghana."
+        }, {
+            id: 1,
+            title: "Ghanaian Afrobeats Reaches Record High on Global Streaming Charts",
+            category: "MUSIC INDUSTRY",
+            author: "Razak Newsroom",
+            date: "March 12, 2026",
+            img: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=800&q=80",
+            snippet: "Data from major streaming services indicates a 45% surge in Ghanaian Afrobeats and Drill consumption worldwide over the past quarter, driven by breakout singles from Black Sherif, King Fresh, and Stonebwoy.",
+            content: "Data from major streaming services indicates a 45% surge in Ghanaian Afrobeats and Drill consumption worldwide over the past quarter. African music continues its unstoppable international expansion."
+        }, {
+            id: 2,
+            title: "Bakatue Fishing Festival 2026: Elmina Prepares for Royal Celebrations",
+            category: "CULTURAL FESTIVALS",
+            author: "Boligeria Cultural Desk",
+            date: "March 08, 2026",
+            img: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80",
+            snippet: "The chiefs and traditional council of Elmina are finalizing plans for the annual Bakatue Fishing Festival. The festival marks the opening of the Benya Lagoon for fishing, accompanied by traditional rituals, royal regattas, and grand live music performances.",
+            content: "The chiefs and traditional council of Elmina are finalizing plans for the annual Bakatue Fishing Festival. The festival marks the opening of the Benya Lagoon for fishing, accompanied by traditional rituals, royal regattas, and grand live music performances."
+        }, {
+            id: 3,
+            title: "Ghana Music Awards 2026 Nominations List officially Unveiled",
+            category: "CELEBRITY GOSSIP",
+            author: "Media Desk",
+            date: "March 05, 2026",
+            img: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=800&q=80",
+            snippet: "The nominations for the prestigious 2026 Ghana Music Awards have been published. Top categories including Artist of the Year feature intense competition between veteran highlife stars and new school Afrobeats icons.",
+            content: "The nominations for the prestigious 2026 Ghana Music Awards have been published. Top categories including Artist of the Year feature intense competition between veteran highlife stars and new school Afrobeats icons."
+        }];
+
+        let artistsData = [{
+            name: "King Fresh",
+            genre: "Afrobeats / Highlife",
+            img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80"
+        }, {
+            name: "Stonebwoy",
+            genre: "Reggae / Dancehall",
+            img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80"
+        }, {
+            name: "Black Sherif",
+            genre: "Highlife / Drill",
+            img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80"
+        }, {
+            name: "Sarkodie",
+            genre: "Hip-Hop / Rap",
+            img: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=400&q=80"
+        }];
+
+        // Audio Player State Variables
+        let currentSongIndex = 0;
+        let isPlaying = false;
+        const audioEngine = document.getElementById('audio-engine');
+
+        // Admin Passcode State
+        let isAdminLoggedIn = false;
+        const ADMIN_PASSCODE = "kingfresh2026";
+
+        // Application Initialization
+        window.addEventListener('load', () => {
+            renderSongGrid('all');
+            renderNewsGrid();
+            renderTopCharts();
+            renderArtistsGrid();
+            loadAudioTrack(currentSongIndex, false);
+
+            // Sync Audio Engine Events
+            audioEngine.addEventListener('timeupdate', updateAudioProgress);
+            audioEngine.addEventListener('ended', nextSong);
+        });
+
+        // Navigation Tab Switcher
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('bg-brand'));
+
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Modal Operations
+        function openModal(id) {
+            document.getElementById(id).classList.remove('hidden');
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.add('hidden');
+        }
+
+        // ================= AUDIO PLAYER ENGINE =================
+        function loadAudioTrack(index, autoPlay = true) {
+            currentSongIndex = index;
+            const song = songsData[currentSongIndex];
+
+            document.getElementById('player-title').innerText = song.title;
+            document.getElementById('player-artist').innerText = song.artist;
+            document.getElementById('player-cover').src = song.cover;
+            audioEngine.src = song.audioUrl;
+
+            if (autoPlay) {
+                audioEngine.play();
+                isPlaying = true;
+                updatePlayButtonIcon();
+            }
+        }
+
+        function togglePlayPause() {
+            if (!audioEngine.src) {
+                loadAudioTrack(0, true);
+                return;
+            }
+
+            if (isPlaying) {
+                audioEngine.pause();
+                isPlaying = false;
+            } else {
+                audioEngine.play();
+                isPlaying = true;
+            }
+            updatePlayButtonIcon();
+        }
+
+        function playSong(index) {
+            loadAudioTrack(index, true);
+        }
+
+        function updatePlayButtonIcon() {
+            const icon = document.getElementById('play-icon');
+            if (isPlaying) {
+                icon.className = "fa-solid fa-pause";
+            } else {
+                icon.className = "fa-solid fa-play ml-0.5";
+            }
+        }
+
+        function prevSong() {
+            currentSongIndex = (currentSongIndex - 1 + songsData.length) % songsData.length;
+            loadAudioTrack(currentSongIndex, true);
+        }
+
+        function nextSong() {
+            currentSongIndex = (currentSongIndex + 1) % songsData.length;
+            loadAudioTrack(currentSongIndex, true);
+        }
+
+        function updateAudioProgress() {
+            if (!audioEngine.duration) return;
+            const progressPercent = (audioEngine.currentTime / audioEngine.duration) * 100;
+            document.getElementById('player-progress').value = progressPercent;
+
+            document.getElementById('player-current-time').innerText = formatTime(audioEngine.currentTime);
+            document.getElementById('player-duration').innerText = formatTime(audioEngine.duration);
+        }
+
+        function seekAudio(percent) {
+            if (!audioEngine.duration) return;
+            audioEngine.currentTime = (percent / 100) * audioEngine.duration;
+        }
+
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+        }
+
+        // Song Download Logic - Creates blob link download
+        function triggerSongDownload(index) {
+            const song = songsData[index];
+            song.downloads += 1;
+
+            // Update download count on UI
+            renderSongGrid('all');
+            renderTopCharts();
+
+            // Initiate file download
+            const element = document.createElement("a");
+            const fileBlob = new Blob([`Simulated MP3 Audio File for: ${song.title} - ${song.artist}`], {
+                type: 'audio/mpeg'
+            });
+            element.href = URL.createObjectURL(fileBlob);
+            element.download = `${song.artist} - ${song.title} [BoligeriaBlog.com].mp3`;
+            document.body.appendChild(element);
+            element.click();
+            document.body.removeChild(element);
+        }
+
+        function downloadCurrentSong() {
+            triggerSongDownload(currentSongIndex);
+        }
+
+        // ================= RENDER DYNAMIC UI CARDS =================
+        function renderSongGrid(filter = 'all') {
+            const homeGrid = document.getElementById('home-songs-grid');
+            const allGrid = document.getElementById('all-songs-grid');
+
+            let list = [...songsData];
+            if (filter === 'trending') {
+                list.sort((a, b) => b.streams - a.streams);
+            }
+
+            const html = list.map(song => `
+        <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition flex gap-4 items-center group">
+          <div class="relative w-20 h-20 rounded-xl overflow-hidden shrink-0">
+            <img src="${song.cover}" class="w-full h-full object-cover" alt="${song.title}">
+            <button onclick="playSong(${song.id})" class="absolute inset-0 bg-brand-dark/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
+              <div class="w-9 h-9 bg-brand text-white rounded-full flex items-center justify-center text-xs shadow-lg">
+                <i class="fa-solid fa-play ml-0.5"></i>
+              </div>
+            </button>
+          </div>
+          
+          <div class="min-w-0 flex-1">
+            <span class="text-[9px] font-black uppercase text-brand bg-brand-light px-2 py-0.5 rounded-full">${song.genre}</span>
+            <h4 class="font-bold text-sm text-brand-dark truncate mt-1">${song.title}</h4>
+            <p class="text-xs text-slate-500 truncate">${song.artist}</p>
+            
+            <div class="flex items-center space-x-3 mt-3 text-[11px] text-slate-400">
+              <span><i class="fa-solid fa-headphones text-brand"></i> ${(song.streams / 1000).toFixed(1)}k</span>
+              <span><i class="fa-solid fa-download text-emerald-600"></i> ${song.downloads}</span>
+            </div>
+          </div>
+
+          <div class="flex flex-col space-y-2">
+            <button onclick="playSong(${song.id})" class="w-8 h-8 rounded-lg bg-brand-light text-brand hover:bg-brand hover:text-white transition flex items-center justify-center text-xs" title="Play Track">
+              <i class="fa-solid fa-play"></i>
+            </button>
+            <button onclick="triggerSongDownload(${song.id})" class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 hover:bg-emerald-600 hover:text-white transition flex items-center justify-center text-xs" title="Download MP3">
+              <i class="fa-solid fa-download"></i>
+            </button>
+          </div>
+        </div>
+      `).join('');
+
+            if (homeGrid) homeGrid.innerHTML = html;
+            if (allGrid) allGrid.innerHTML = html;
+        }
+
+        function renderNewsGrid() {
+            const container = document.getElementById('home-news-container');
+            const allNewsGrid = document.getElementById('all-news-grid');
+
+            const html = newsArticles.map(article => `
+        <article class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex flex-col sm:flex-row gap-4 group">
+          <img src="${article.img}" class="w-full sm:w-44 h-32 object-cover rounded-xl shrink-0" alt="News Image">
+          <div class="flex flex-col justify-between flex-1">
+            <div>
+              <div class="flex items-center justify-between text-[10px] text-slate-400 font-bold mb-1">
+                <span class="text-brand uppercase">${article.category}</span>
+                <span>${article.date}</span>
+              </div>
+              <h4 onclick="openArticleModal(${article.id})" class="font-bold text-sm text-brand-dark group-hover:text-brand cursor-pointer transition line-clamp-2">
+                ${article.title}
+              </h4>
+              <p class="text-xs text-slate-500 line-clamp-2 mt-1">${article.snippet}</p>
+            </div>
+            <button onclick="openArticleModal(${article.id})" class="text-brand font-bold text-xs hover:underline mt-2 text-left">
+              Read Full Story →
+            </button>
+          </div>
+        </article>
+      `).join('');
+
+            if (container) container.innerHTML = html;
+            if (allNewsGrid) allNewsGrid.innerHTML = html;
+        }
+
+        function renderTopCharts() {
+            const topList = document.getElementById('top-chart-list');
+            const sorted = [...songsData].sort((a, b) => b.downloads - a.downloads);
+
+            if (!topList) return;
+            topList.innerHTML = sorted.map((song, i) => `
+        <div class="flex items-center justify-between p-2 rounded-xl hover:bg-brand-light/50 transition">
+          <div class="flex items-center space-x-3">
+            <span class="font-black text-sm text-brand w-4">${i + 1}</span>
+            <div>
+              <h5 class="font-bold text-xs text-brand-dark line-clamp-1">${song.title}</h5>
+              <p class="text-[10px] text-slate-400">${song.artist}</p>
+            </div>
+          </div>
+          <button onclick="triggerSongDownload(${song.id})" class="text-emerald-600 text-xs hover:scale-110 transition">
+            <i class="fa-solid fa-circle-arrow-down"></i>
+          </button>
+        </div>
+      `).join('');
+        }
+
+        function renderArtistsGrid() {
+            const homeArtists = document.getElementById('home-artists-grid');
+            const allArtists = document.getElementById('all-artists-grid');
+
+            const html = artistsData.map(artist => `
+        <div class="bg-brand-bg/60 p-4 rounded-2xl border border-slate-200 text-center hover:bg-white hover:shadow-md transition group">
+          <img src="${artist.img}" class="w-20 h-20 mx-auto rounded-full object-cover border-2 border-brand/20 group-hover:scale-105 transition mb-2" alt="${artist.name}">
+          <h4 class="font-bold text-sm text-brand-dark">${artist.name}</h4>
+          <p class="text-[11px] text-slate-500">${artist.genre}</p>
+        </div>
+      `).join('');
+
+            if (homeArtists) homeArtists.innerHTML = html;
+            if (allArtists) allArtists.innerHTML = html;
+        }
+
+        // Article Modal Reader
+        function openArticleModal(id) {
+            const article = newsArticles.find(a => a.id === id);
+            if (!article) return;
+
+            document.getElementById('modal-article-cat').innerText = article.category;
+            document.getElementById('modal-article-title').innerText = article.title;
+            document.getElementById('modal-article-meta').innerText = `${article.date} • By ${article.author}`;
+            document.getElementById('modal-article-img').src = article.img;
+            document.getElementById('modal-article-content').innerText = article.content;
+
+            openModal('article-modal');
+        }
+
+        // Global Search Handler
+        function handleGlobalSearch(e) {
+            const query = e.target.value.toLowerCase().trim();
+            if (!query) {
+                renderSongGrid('all');
+                return;
+            }
+
+            const filtered = songsData.filter(s =>
+                s.title.toLowerCase().includes(query) ||
+                s.artist.toLowerCase().includes(query) ||
+                s.genre.toLowerCase().includes(query)
+            );
+
+            const homeGrid = document.getElementById('home-songs-grid');
+            if (homeGrid) {
+                if (filtered.length === 0) {
+                    homeGrid.innerHTML = `<p class="col-span-full text-xs text-slate-500 text-center py-6">No matching songs found for "${query}"</p>`;
+                } else {
+                    homeGrid.innerHTML = filtered.map(song => `
+            <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex gap-4 items-center">
+              <img src="${song.cover}" class="w-16 h-16 rounded-xl object-cover" alt="Cover">
+              <div class="min-w-0 flex-1">
+                <h4 class="font-bold text-sm text-brand-dark truncate">${song.title}</h4>
+                <p class="text-xs text-slate-500 truncate">${song.artist}</p>
+              </div>
+              <button onclick="playSong(${song.id})" class="bg-brand text-white p-2 rounded-lg text-xs"><i class="fa-solid fa-play"></i></button>
+            </div>
+          `).join('');
+                }
+            }
+        }
+
+        // Filter Songs By Genre
+        function filterSongsByGenre(genre) {
+            switchTab('songs');
+            document.getElementById('genre-filter').value = genre;
+            applySongFilters();
+        }
+
+        function applySongFilters() {
+            const selectedGenre = document.getElementById('genre-filter').value;
+            const selectedSort = document.getElementById('sort-filter').value;
+
+            let filtered = [...songsData];
+
+            if (selectedGenre !== 'ALL') {
+                filtered = filtered.filter(s => s.genre === selectedGenre);
+            }
+
+            if (selectedSort === 'popular') {
+                filtered.sort((a, b) => b.streams - a.streams);
+            } else if (selectedSort === 'downloads') {
+                filtered.sort((a, b) => b.downloads - a.downloads);
+            }
+
+            const allGrid = document.getElementById('all-songs-grid');
+            allGrid.innerHTML = filtered.map(song => `
+        <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex gap-4 items-center">
+          <img src="${song.cover}" class="w-16 h-16 rounded-xl object-cover" alt="Cover">
+          <div class="min-w-0 flex-1">
+            <span class="text-[9px] font-black uppercase text-brand bg-brand-light px-2 py-0.5 rounded-full">${song.genre}</span>
+            <h4 class="font-bold text-sm text-brand-dark truncate mt-1">${song.title}</h4>
+            <p class="text-xs text-slate-500 truncate">${song.artist}</p>
+          </div>
+          <button onclick="triggerSongDownload(${song.id})" class="bg-emerald-600 text-white p-2 rounded-lg text-xs"><i class="fa-solid fa-download"></i></button>
+        </div>
+      `).join('');
+        }
+
+        // Filter News Categories
+        function filterNewsCategory(cat) {
+            if (cat === 'ALL') {
+                renderNewsGrid();
+            } else {
+                const filtered = newsArticles.filter(a => a.category === cat);
+                const allNewsGrid = document.getElementById('all-news-grid');
+                allNewsGrid.innerHTML = filtered.map(article => `
+          <article class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex gap-4">
+            <img src="${article.img}" class="w-32 h-24 object-cover rounded-xl" alt="News Image">
+            <div>
+              <span class="text-[10px] text-brand font-bold uppercase">${article.category}</span>
+              <h4 class="font-bold text-sm text-brand-dark mt-1">${article.title}</h4>
+            </div>
+          </article>
+        `).join('');
+            }
+        }
+
+        // ================= ADMIN SECURITY & MANAGEMENT =================
+        function promptAdminLogin() {
+            if (isAdminLoggedIn) {
+                switchTab('admin');
+            } else {
+                document.getElementById('admin-passcode-error').classList.add('hidden');
+                openModal('admin-password-modal');
+            }
+        }
+
+        function verifyAdminPasscode(e) {
+            e.preventDefault();
+            const inputPass = document.getElementById('admin-passcode-input').value;
+
+            if (inputPass === ADMIN_PASSCODE) {
+                isAdminLoggedIn = true;
+                closeModal('admin-password-modal');
+                switchTab('admin');
+                alert("Admin Access Granted!");
+            } else {
+                document.getElementById('admin-passcode-error').classList.remove('hidden');
+            }
+        }
+
+        function lockAdminPortal() {
+            isAdminLoggedIn = false;
+            switchTab('home');
+            alert("Admin Portal Locked Successfully.");
+        }
+
+        function handleAdminPublishArticle(e) {
+            e.preventDefault();
+            const title = document.getElementById('admin-news-title').value;
+            const category = document.getElementById('admin-news-category').value;
+            const snippet = document.getElementById('admin-news-content').value;
+
+            const newArticle = {
+                id: newsArticles.length,
+                title: title,
+                category: category,
+                author: "Admin Desk",
+                date: "Just Now",
+                img: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=800&q=80",
+                snippet: snippet,
+                content: snippet
+            };
+
+            newsArticles.unshift(newArticle);
+            renderNewsGrid();
+            document.getElementById('stat-total-articles').innerText = newsArticles.length;
+
+            alert("News Article Published Successfully!");
+            e.target.reset();
+        }
+
+        function handleAdminUploadSong(e) {
+            e.preventDefault();
+            const title = document.getElementById('upload-song-title').value;
+            const artist = document.getElementById('upload-artist-name').value;
+            const genre = document.getElementById('upload-genre').value;
+
+            const newSong = {
+                id: songsData.length,
+                title: title,
+                artist: artist,
+                genre: genre,
+                cover: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=600&q=80",
+                audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+                streams: 10,
+                downloads: 0
+            };
+
+            songsData.unshift(newSong);
+            renderSongGrid('all');
+            document.getElementById('stat-total-songs').innerText = songsData.length;
+
+            closeModal('add-song-modal');
+            alert("Song Uploaded Successfully!");
+            e.target.reset();
+        }
+
+        function updateTickerText() {
+            const newText = document.getElementById('admin-ticker-input').value;
+            document.getElementById('ticker-content').innerText = newText;
+            alert("Marquee Ticker Updated!");
+        }
+
+        function handleUserLogin(e) {
+            e.preventDefault();
+            const username = document.getElementById('login-username').value;
+            document.getElementById('user-status-badge').innerHTML = `<i class="fa-solid fa-circle-user mr-1 text-emerald-400"></i> ${username}`;
+            closeModal('login-modal');
+            alert(`Welcome back, ${username}!`);
+        }
+
+        function handleSubscribe(e) {
+            e.preventDefault();
+            alert("Thank you for subscribing to King Fresh Music Newsletter!");
+            e.target.reset();
+        }
+    </script>
+</body>
+
+</html>
